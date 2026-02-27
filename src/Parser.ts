@@ -3,7 +3,7 @@ import * as AST from "../interfaces/ASTNode";
 import { Program } from "../interfaces/Program";
 import { Token } from "../interfaces/Token";
 
-import { TokenType } from "../types/types";
+import { Keyword, TokenType } from "../types/types";
 
 export class Parser {
     private tokens: Token[];
@@ -15,13 +15,23 @@ export class Parser {
 
     // parsing
 
-    /*
+    // returns type of Program | void instead of just Program in order to avoid issues from vscode yelling at me
+    public parse(): Program | void {
+        const statements: AST.Statement[] = [];
 
-    public parse(): Program {
-        //
+        while (!this.atEOF()) {
+            if (this.checkKeyword("HALT")) {
+                this.advance();
+                statements.push({ type: "HaltStatement", line: this.previous().line, col: this.previous().idx });
+                break;
+            }
+            // parse statement (implement a method)
+        }
     }
 
-    */
+    // TO-DO:
+    // Implement a method(s) for parsing statements
+    // for expressions/terms
 
     // checks
 
@@ -29,9 +39,19 @@ export class Parser {
         return this.peek().type === TokenType.EOF;
     }
 
+    // commenting so vscode wont yell at me
+    /*
+
     private checkType(tokenType: TokenType): boolean {
         if (this.atEOF()) return false;
         return this.peek().type === tokenType;
+    }
+
+    */
+
+    private checkKeyword(keyword: Keyword): boolean {
+        if (this.atEOF()) return false;
+        return this.peek().type === TokenType.Keyword && this.peek().value === keyword;
     }
 
     // advance forward or backward
@@ -49,6 +69,9 @@ export class Parser {
         return this.previous();
     }
 
+    // commenting so vscode wont yell at me
+    /*
+
     private consume(
         tokenType: TokenType,
         message: string = `Error at line ${this.peek().line} on index ${this.peek().idx}`,
@@ -56,4 +79,6 @@ export class Parser {
         if (this.checkType(tokenType)) return this.advance();
         throw new Error(message);
     }
+
+    */
 }
