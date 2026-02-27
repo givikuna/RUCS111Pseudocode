@@ -49,3 +49,23 @@ export enum TokenType {
     EOF = "EOF",
     Unknown = "Unknown",
 }
+
+export type ASTNodeType =
+    | "Program"
+    | "ReadStatement"
+    | "DisplayStatement"
+    | "SetStatement"
+    | "ComputeStatement"
+    | "AddStatement"
+    | "SubtractStatement"
+    | "IfStatement"
+    | "WhileStatement"
+    | "DoWhileStatement"
+    | "RepeatUntilStatement"
+    | "ForStatement"
+    | "HaltStatement"
+    | "NumericLiteral"
+    | "StringLiteral"
+    | "BooleanLiteral"
+    | "Identifier"
+    | "BinaryExpression";
