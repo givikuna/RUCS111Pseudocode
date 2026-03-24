@@ -2,6 +2,7 @@ import { ASTNodeType } from "../types/types";
 
 export interface ASTNode {
     type: ASTNodeType;
+    // initToken: Token;
     line?: number;
     col?: number;
 }
